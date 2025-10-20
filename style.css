@@ -444,3 +444,178 @@ section .section-title:hover::after {
 .col-xs-12:nth-child(2) { animation-delay: 0.2s; }
 .col-xs-12:nth-child(3) { animation-delay: 0.3s; }
 .col-xs-12:nth-child(4) { animation-delay: 0.4s; }
+/* === NAVBAR BASE === */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  color: #0ff;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+/* === THEME BUTTONS === */
+.theme-btn {
+  border: none;
+  background: transparent;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  padding: 0.5rem 1rem;
+  margin: 0 0.3rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: 0.3s ease;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.theme-btn:hover {
+  box-shadow: 0 0 10px #0ff, 0 0 30px #0ff;
+  color: #0ff;
+  transform: scale(1.05);
+}
+
+/* === THEME MODES === */
+:root {
+  --bg-color: #000;
+  --text-color: #fff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Light mode */
+body.light-mode {
+  --bg-color: #f5f5f5;
+  --text-color: #222;
+}
+
+/* Dark mode */
+body.dark-mode {
+  --bg-color: #0a0a0a;
+  --text-color: #e0e0e0;
+}
+
+/* Night mode (Cyberpunk vibes) */
+body.night-mode {
+  --bg-color: #050014;
+  --text-color: #0ff;
+  background-image: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.15), transparent 60%),
+                    radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.15), transparent 60%);
+  background-blend-mode: overlay;
+}
+/* Glitch animation for active theme button */
+.theme-btn.active {
+  position: relative;
+  color: #0ff;
+  text-shadow: 
+    0 0 5px #0ff, 
+    0 0 10px #0ff, 
+    0 0 20px #0ff, 
+    0 0 40px #0ff;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; }
+  20% { text-shadow: 2px 2px #f0f, -2px -2px #0ff; }
+  40% { text-shadow: -2px -2px #f0f, 2px 2px #0ff; }
+  60% { text-shadow: 2px -2px #f0f, -2px 2px #0ff; }
+  80% { text-shadow: -2px 2px #f0f, 2px -2px #0ff; }
+  100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; }
+}
+/* Neon theme buttons */
+.theme-btn {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  background: transparent;
+  color: #0ff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.theme-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #0ff, #f0f, #ff0, #0ff);
+  filter: blur(10px);
+  opacity: 0.7;
+  transform: rotate(0deg);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.theme-btn:hover::before {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+.theme-btn.active {
+  color: #fff;
+  background: linear-gradient(45deg, #0ff, #f0f, #ff0);
+  box-shadow: 
+    0 0 5px #0ff, 
+    0 0 10px #f0f, 
+    0 0 20px #ff0, 
+    0 0 40px #0ff;
+  animation: neonPulse 1.5s infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 5px #0ff, 0 0 10px #f0f, 0 0 20px #ff0, 0 0 40px #0ff;
+  }
+  50% {
+    box-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 30px #ff0, 0 0 60px #0ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #0ff, 0 0 10px #f0f, 0 0 20px #ff0, 0 0 40px #0ff;
+  }
+}
+
+/* Hover neon trail */
+.theme-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-btn::after {
+  content: '';
+  position: absolute;
+  top: var(--y, 50%);
+  left: var(--x, 50%);
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(0,255,255,0.5) 0%, transparent 60%);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.theme-btn:hover::after {
+  width: 120%;
+  height: 400%;
+}
