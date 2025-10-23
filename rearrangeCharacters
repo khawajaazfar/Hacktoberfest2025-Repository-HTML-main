@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int rearrangeCharacters(string s, string target) {
+        unordered_map<char, int> sfreq;
+        for(auto i : s) sfreq[i]++;
+        
+        unordered_map<char, int> tfreq;
+        for(auto i : target) tfreq[i]++;
+        
+        int ans = 1e9;
+        
+        for(auto i : tfreq) {
+            ans = min(ans, sfreq[i.first]/i.second);
+        }
+        
+        return ans;
+    }
+};
